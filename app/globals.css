@@ -1,9 +1,25 @@
+@import "modern-normalize";
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: var(--font-Inter), sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding: 0;
   margin: 0;
-  background-color: #f8f9fa;
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
