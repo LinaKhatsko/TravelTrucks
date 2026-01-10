@@ -1,0 +1,71 @@
+.hero {
+    position: relative;
+    min-height: 696px;
+    border: 1px solid #000;
+    display: flex;
+    background-image: url("/image/hero.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(100vh - 72px);
+    padding-top: 260px;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    /* 20% прозорості, як у Figma */
+}
+
+.heroContent {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-size: 48px;
+    line-height: 0.67;
+    font-weight: 600;
+    color: #f7f7f7;
+    margin-bottom: 16px;
+}
+
+.text {
+    font-size: 24px;
+    font-weight: 600;
+    color: #f7f7f7;
+    line-height: 1.33;
+    margin-bottom: 40px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 200px;
+    padding: 16px 48px;
+    width: 173px;
+    height: 56px;
+    background-color: #e44848;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease;
+    }
+
+.button:hover, 
+.button:focus, 
+.button:active {
+    background-color: #d84343;
+}
