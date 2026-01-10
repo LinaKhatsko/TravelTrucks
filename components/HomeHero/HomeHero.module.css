@@ -8,7 +8,7 @@
     background-position: center;
     background-repeat: no-repeat;
     height: calc(100vh - 72px);
-    padding-top: 260px;
+    align-items: center;
 }
 
 .hero::before {

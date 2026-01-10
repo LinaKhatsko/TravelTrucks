@@ -8,15 +8,12 @@ import { fetchNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList/NoteList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import css from "./NotesPage.module.css";
 import { Toaster } from "react-hot-toast";
 
 const NotesClient = () => {
     const [page, setPage] = useState<number>(1);
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [debouncedQuery] = useDebounce(searchQuery, 500);
 
     useEffect(() => {
@@ -33,8 +30,7 @@ const NotesClient = () => {
         setPage(event.selected + 1);
     };
 
-    const openModal = (): void => setIsModalOpen(true);
-    const closeModal = (): void => setIsModalOpen(false);
+ 
 
     const handleCreated = () => toast.success("Note created successfully!");
     const handleDeleted = () => toast.success("Note deleted successfully!");
@@ -51,9 +47,6 @@ const NotesClient = () => {
                         onPageChange={handlePageClick}
                     />
                 )}
-                <button className={css.button} onClick={openModal}>
-                    Create note +
-                </button>
             </header>
             <main>
                 {notesData && notesData.notes.length > 0 && (
@@ -63,9 +56,6 @@ const NotesClient = () => {
                     />
                 )}
             </main>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <NoteForm onCancel={closeModal} onCreated={handleCreated} />
-            </Modal>
         </div>
     );
 };
