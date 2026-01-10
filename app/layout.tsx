@@ -1,29 +1,30 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Inter } from "next/font/google";
 import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import "./globals.css";
 
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  variable: "--font-Inter",
+});
+
 export const metadata: Metadata = {
-  title: "NoteHub",
-  description: "Your personal space for notes",
+  title: "TravelTrucks",
+  description: "Camper rental service",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}:{
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <TanStackProvider>
+      <body className={`${inter.variable}`}>
           <Header />
           <main>{children}</main>
-          <Footer />
-        </TanStackProvider>
       </body>
     </html>
   );
