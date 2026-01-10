@@ -23,3 +23,9 @@ p {
 a {
   text-decoration: none;
 }
+
+.container {
+  max-width: 1440px;
+  margin: 0px auto;
+  padding: 0 64px;
+}
