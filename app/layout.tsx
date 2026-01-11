@@ -1,6 +1,6 @@
+import Header from "../components/Header/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Providers from "./сomponents/Providers/Providers";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,9 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Providers>
+        <Header />
+        <main>
           {children}
-        </Providers>
+        </main>
       </body>
     </html>
   );
