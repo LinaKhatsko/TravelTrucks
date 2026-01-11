@@ -1,0 +1,43 @@
+.optionsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.filterCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 95px;
+    border: 1px solid #dadde1;
+    border-radius: 12px;
+    background: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+/* Стан, коли фільтр обрано (червона рамка) */
+.filterCard.active {
+    border-color: #e44848;
+}
+
+.filterCard span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #101828;
+}
+
+.searchBtn {
+    margin-top: 64px;
+    padding: 16px 60px;
+    background-color: #e44848;
+    color: white;
+    border: none;
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
