@@ -53,7 +53,7 @@ export interface CampersQuery {
 
 export interface FiltersState {
   location: string;
-  form: string | null;
+  form: string | "";
   transmission: string | null;
   features: Record<string, boolean>;
 }
