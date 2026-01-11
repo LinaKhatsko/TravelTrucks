@@ -9,13 +9,11 @@ interface CamperCardProps {
 }
 
 export const CamperCard = ({ camper }: CamperCardProps) => {
-  // Отримуємо функції зі стору обраного
-  const { toggleFavorite, isFavorite } = useFavoritesStore();
-  
-  const isFav = isFavorite(camper.id);
 
-  // Функція для форматування ціни
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  const isFav = isFavorite(camper.id);
   const formatPrice = (price: number) => {
+
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'EUR',
@@ -30,8 +28,9 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
         <Image
           src={camper.gallery[0].thumb}
           alt={camper.name}
-          fill
           className={s.image}
+          width={290}
+          height={310}
         />
       </div>
 
