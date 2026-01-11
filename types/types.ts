@@ -1,3 +1,16 @@
+export interface Review {
+  reviewer_name: string;
+  reviewer_rating: number;
+  comment: string;
+}
+
+export interface GalleryItem {
+  thumb: string;
+  original: string;
+}
+
+export type CamperForm = 'alcove' | 'panelTruck' | 'fullyIntegrated';
+
 export interface Camper {
   id: string;
   name: string;
@@ -5,7 +18,7 @@ export interface Camper {
   rating: number;
   location: string;
   description: string;
-  form: 'alcove' | 'panelTruck' | 'fullyIntegrated';
+  form: CamperForm;
 
   transmission: string;
   engine: string;
@@ -33,45 +46,16 @@ export interface CampersQuery {
   page?: number;
   limit?: number;
   location?: string;
-  form?: 'alcove' | 'panelTruck' | 'fullyIntegrated';
+  form?: CamperForm;
   transmission?: string;
-  AC?: true;
-  bathroom?: true;
-  kitchen?: true;
-  TV?: true;
-  radio?: true;
-  refrigerator?: true;
-  microwave?: true;
-  gas?: true;
-  water?: true;
-}
-
-export interface Review {
-    reviewer_name: string;
-    reviewer_rating: number;
-    comment: string;
-}
-
-export interface GalleryItem {
-    thumb: string;
-    original: string;
+  [key: string]: string | number | boolean | undefined;
 }
 
 export interface FiltersState {
   location: string;
   form: string | null;
   transmission: string | null;
-  features: {
-    AC: boolean;
-    bathroom: boolean;
-    kitchen: boolean;
-    TV: boolean;
-    radio: boolean;
-    refrigerator: boolean;
-    microwave: boolean;
-    gas: boolean;
-    water: boolean;
-  };
+  features: Record<string, boolean>;
 }
 
 export const initialFilters: FiltersState = {
