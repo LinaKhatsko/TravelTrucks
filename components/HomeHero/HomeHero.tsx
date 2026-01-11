@@ -9,7 +9,7 @@ const HomeHero = () => {
               <p className={styles.text}>
                   You can find everything you want in our catalog
               </p>
-              <Link href="/catalog" className={styles.button}>
+              <Link href="/campers" className={styles.button}>
                   View Now
               </Link>
           </div>
