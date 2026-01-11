@@ -23,15 +23,15 @@ export interface Camper {
   transmission: string;
   engine: string;
 
-  AC: boolean;
-  bathroom: boolean;
-  kitchen: boolean;
-  TV: boolean;
-  radio: boolean;
-  refrigerator: boolean;
-  microwave: boolean;
-  gas: boolean;
-  water: boolean;
+  AC?: boolean;
+  bathroom?: boolean;
+  kitchen?: boolean;
+  TV?: boolean;
+  radio?: boolean;
+  refrigerator?: boolean;
+  microwave?: boolean;
+  gas?: boolean;
+  water?: boolean;
 
   length: string;
   width: string;
