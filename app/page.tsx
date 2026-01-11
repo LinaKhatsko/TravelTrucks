@@ -5,7 +5,6 @@ import css from "./Home.module.css";
 export default function HomePage() {
     return (
         <>
-            <Header />
             <main className={css.main}>
                 <HomeHero />
             </main>
