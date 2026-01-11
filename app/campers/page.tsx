@@ -7,8 +7,14 @@ export default function Catalog() {
         <>
             <main className={css.main}>
                 <div className={`container ${css.container}`}>
-                    <Filters />
-                    <CamperList />
+                    <aside className={css.filtersWrapper}>
+                        <Filters />
+                    </aside>
+                    <section className={css.content}>
+                        <div className={css.listWrapper}>
+                            <CamperList />
+                        </div>
+                    </section>
                 </div>
             </main>
         </>

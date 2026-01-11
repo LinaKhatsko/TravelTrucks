@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 64px;
+    /* Відступи зверху та з боків */
+}
+
+.filtersWrapper {
+    width: 360px;
+    flex-shrink: 0;
+}
+
+.content {
+    flex-grow: 1;
+    /* Це важливо, щоб картки не ставали в ряд */
+    display: flex;
+    flex-direction: column;
+}
