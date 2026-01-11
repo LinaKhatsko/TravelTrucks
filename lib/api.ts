@@ -1,64 +1,35 @@
 import axios from "axios";
-import type { Note, NoteTag } from "../types/note";
+import { Camper, CampersQuery } from "@/types/types";
 
-const apiClient = axios.create({
-    baseURL: "https://notehub-public.goit.study/api",
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-apiClient.interceptors.request.use((config) => {
-    const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-       if (token) {
-        (config.headers as Record<string, string>)["Authorization"] = `Bearer ${token}`;
-    }
-
-    return config;
-});
-
-export interface FetchNotesResponse {
-    notes: Note[];
-    totalPages: number;
-}
-
-interface FetchNotesParams {
-    page?: number;
-    query?: string;
-}
-
-export interface NewNotePayload {
-    title: string;
-    content: string;
-    tag: NoteTag;
-}
-
-export const fetchNotes = async ({
-    page = 1,
-    query = "",
-}: FetchNotesParams): Promise<FetchNotesResponse> => {
-    const response = await apiClient.get<FetchNotesResponse>("/notes", {
-        params: {
-            page,
-            perPage: 12,
-            ...(query ? { search: query } : {}),
-        },
+export const getCampers = async (
+  params?: CampersQuery
+): Promise<Camper[]> => {
+ try {
+    const { data } = await api.get<Camper[]>("/campers", { 
+      params 
     });
-    return response.data;
+    return data;
+  } catch (error) {
+    console.error("Error fetching campers:", error);
+    throw error;
+  }
 };
 
-export const createNote = async (noteData: NewNotePayload): Promise<Note> => {
-    const response = await apiClient.post<Note>("/notes", noteData);
-    return response.data;
-};
-
-export const deleteNote = async (noteId: string): Promise<Note> => {
-    if (!noteId) {
-        throw new Error("Note ID is required for deletion");
-    }
-    const response = await apiClient.delete<Note>(`/notes/${noteId}`);
-    return response.data;
-};
-
-// Новая функция для получения одной заметки
-export const fetchNoteById = async (noteId: string): Promise<Note> => {
-    const response = await apiClient.get<Note>(`/notes/${noteId}`);
-    return response.data;
+export const getCamperById = async (id: string): Promise<Camper> => {
+ try {
+    const { data } = await api.get<Camper>(`/campers/${id}`);
+    return data;
+  } catch (error) {
+    console.error(`Error fetching camper with id ${id}:`, error);
+    throw error;
+  }
 };
