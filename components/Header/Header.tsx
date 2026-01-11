@@ -4,18 +4,20 @@ import css from "./Header.module.css";
 
 const Header = () => {
     return (
-        <header className={`container ${css.header}`}>
-            <Logo className={css.logo}/>
+        <header className={css.header}>
+            <div className={css.container}>
+            <Logo />
             <nav aria-label="Main Navigation">
                 <ul className={css.navigation}>
                     <li>
                         <Link href="/">Home</Link>
                     </li>
                     <li>
-                        <Link href="/notes">Catalog</Link>
+                        <Link href="/catalog">Catalog</Link>
                     </li>
                 </ul>
-            </nav>
+                </nav>
+                </div>
         </header>
     );
 };

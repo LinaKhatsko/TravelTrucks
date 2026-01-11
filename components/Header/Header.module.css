@@ -1,18 +1,21 @@
 .header {
-    display: flex;
-    align-items: center;
-    padding: 24px 64px;
+    width: 100%;
     background-color: #f7f7f7;
     color: #101828;
+    border-bottom: 1px solid #f2f4f7;
 }
 
-.logo {
-    margin-right: 450px;
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 64px;
 }
 
 .navigation {
     list-style-type: none;
-    margin: 0;
+    margin-left: 450px;
     padding: 0;
     display: flex;
     gap: 32px;
