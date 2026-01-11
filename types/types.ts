@@ -60,7 +60,7 @@ export interface FiltersState {
 
 export const initialFilters: FiltersState = {
   location: "",
-  form: null,
+  form: "",
   transmission: null,
   features: {
     AC: false,
