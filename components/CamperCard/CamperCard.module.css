@@ -1,0 +1,92 @@
+.card {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid #dadde1;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 290px;
+    height: 310px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.info {
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.priceWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.heartBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.heartIcon {
+    fill: none;
+    stroke: #101828;
+    transition: all 0.3s ease;
+}
+
+.heartIconActive {
+    fill: #E44848;
+    stroke: #E44848;
+}
+
+.featuresList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: #f2f4f7;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.showMoreBtn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 16px 40px;
+    background-color: #e44848;
+    color: white;
+    border-radius: 200px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.showMoreBtn:hover {
+    background-color: #d84343;
+}
