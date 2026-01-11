@@ -105,7 +105,7 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
         </ul>
 
         {/* Кнопка переходу */}
-        <Link href={`/catalog/${camper.id}`} className={s.showMoreBtn}>
+        <Link href={`/campers/${camper.id}`} className={s.showMoreBtn}>
           Show more
         </Link>
       </div>
