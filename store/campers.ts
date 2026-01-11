@@ -41,12 +41,17 @@ export const useCamperStore = create<CamperStore>((set, get) => ({
   incrementPage: () => set((state) => ({ page: state.page + 1 })),
 
   fetchCampers: async (isNewSearch = false) => {
-    const { filters, page, items } = get();
-    set({ isLoading: true, error: null });
+    const { filters, page } = get();
+    if (isNewSearch) {
+    set({ items: [], page: 1, isLoading: true, error: null });
+  } else {
+      set({ isLoading: true, error: null });
+    }
 
     try {
+      const currentPage = isNewSearch ? 1 : page;
       const params: CampersQuery = {
-        page: isNewSearch ? 1 : page,
+        page: currentPage,
         limit: 4,
       };
 
@@ -61,20 +66,32 @@ export const useCamperStore = create<CamperStore>((set, get) => ({
       const response = await axios.get(API_URL, { params });
       
       const newItems = response.data.items || response.data;
-      const limit = 4;
 
+      const currentItems = get().items;
       set({
-        items: isNewSearch ? newItems : [...items, ...newItems],
-        hasMore: newItems.length === limit,
-        isLoading: false,
-      });
-    } catch (err) {
-        const error = err as AxiosError;
-      set({ 
-        error:error.response?.status === 404 ? "Нічого не знайдено" : "Помилка сервера", 
-        isLoading: false,
-        items: isNewSearch ? [] : get().items 
-      });
-    }
-  },
+      // 2. Якщо новий пошук - ставимо тільки нові дані. 
+      // Якщо Load More - додаємо до існуючих, фільтруючи дублікати про всяк випадок.
+      items: isNewSearch 
+        ? newItems 
+        : [
+            ...currentItems, 
+            ...newItems.filter((newItem: Camper) => 
+             !currentItems.some((oldItem) => String(oldItem.id) === String(newItem.id))
+        )
+          ],
+      hasMore: newItems.length === 4,
+      isLoading: false,
+      // 3. Збільшуємо сторінку для наступного Load More
+      page: currentPage + 1,
+    });
+  } catch (err) {
+    const error = err as AxiosError;
+    set({ 
+      error: error.response?.status === 404 ? "Нічого не знайдено" : "Помилка сервера", 
+      isLoading: false,
+      // Якщо нічого не знайдено при новому пошуку - очищуємо список
+      items: isNewSearch ? [] : get().items 
+    });
+  }
+},
 }));
