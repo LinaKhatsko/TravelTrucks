@@ -1,3 +1,9 @@
+import css from "./loading.module.css";
+
 export default function Loading() {
-    return <p>Loading, please wait...</p>;
+    return (
+        <div className={css.container}>
+            <div className={css.loader}></div>
+        </div>
+    );
 }
