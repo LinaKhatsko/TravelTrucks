@@ -31,6 +31,7 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
           className={s.image}
           width={290}
           height={310}
+          priority
         />
       </div>
 
@@ -51,7 +52,7 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
                 height="24" 
                 className={isFav ? s.heartIconActive : s.heartIcon}
               >
-                <use href="/icons.svg#icon-heart" />
+                <use href="/sprite.svg#heart" />
               </svg>
             </button>
           </div>
@@ -61,7 +62,7 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
         <div className={s.meta}>
           <div className={s.rating}>
             <svg width="16" height="16" className={s.starIcon}>
-              <use href="/icons.svg#icon-star" />
+              <use href="/sprite.svg#star" />
             </svg>
             <span className={s.ratingText}>
               {camper.rating}({camper.reviews.length} Reviews)
@@ -69,7 +70,7 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
           </div>
           <div className={s.location}>
             <svg width="16" height="16" className={s.mapIcon}>
-              <use href="/icons.svg#icon-map" />
+              <use href="/sprite.svg#map-16" />
             </svg>
             <span>{camper.location}</span>
           </div>
@@ -87,18 +88,18 @@ export const CamperCard = ({ camper }: CamperCardProps) => {
             </li>
           )}
           <li className={s.featureItem}>
-            <svg width="20" height="20"><use href="/icons.svg#icon-fuel" /></svg>
+            <svg width="20" height="20"><use href="/sprite.svg#fuel-pump" /></svg>
             {camper.engine}
           </li>
           {camper.kitchen && (
             <li className={s.featureItem}>
-              <svg width="20" height="20"><use href="/icons.svg#icon-kitchen" /></svg>
+              <svg width="20" height="20"><use href="/sprite.svg#icon-kitchen" /></svg>
               Kitchen
             </li>
           )}
           {camper.AC && (
             <li className={s.featureItem}>
-              <svg width="20" height="20"><use href="/icons.svg#icon-ac" /></svg>
+              <svg width="20" height="20"><use href="/sprite.svg#icon-ac" /></svg>
               AC
             </li>
           )}

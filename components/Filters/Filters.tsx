@@ -1,44 +1,59 @@
 "use client";
 
+import { ChangeEvent } from "react";
 import { useCamperStore } from "../../store/campers";
 import { CamperForm } from "../../types/types";
-import s from "./Filters.module.css";
+import css from "./Filters.module.css";
 
 export const Filters = () => {
   const { filters, setFilters, fetchCampers } = useCamperStore();
 
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /* ===== handlers ===== */
+
+  const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFilters({ location: e.target.value });
   };
 
-  const handleFeatureChange = (feature: string) => {
-    const updatedFeatures = {
-      ...filters.features,
-      [feature]: !filters.features[feature as keyof typeof filters.features],
-    };
-    setFilters({ features: updatedFeatures });
+  const handleFeatureToggle = (feature: keyof typeof filters.features) => {
+    setFilters({
+      features: {
+        ...filters.features,
+        [feature]: !filters.features[feature],
+      },
+    });
   };
 
-  const handleTypeChange = (type: string) => {
-    setFilters({ form: type as CamperForm });
+  const handleTransmissionToggle = () => {
+    setFilters({
+      transmission:
+        filters.transmission === "automatic" ? "" : "automatic",
+    });
+  };
+
+  const handleTypeChange = (type: CamperForm) => {
+    setFilters({ form: type });
   };
 
   const handleSearch = () => {
-    fetchCampers(true); // Скидаємо на 1 сторінку і вантажимо нові дані
+    fetchCampers(true); // reset page + fetch with new filters
   };
 
+  /* ===== render ===== */
+
   return (
-    <aside className={s.sidebar}>
-      {/* Location */}
-      <div className={s.filterGroup}>
-        <label className={s.label}>Location</label>
-        <div className={s.inputWrapper}>
-          <svg className={s.iconMap} width="20" height="20">
-            <use href="/icons.svg#icon-map" />
+    <aside className={css.sidebar}>
+      {/* ===== Location ===== */}
+      <div className={css.filterGroup}>
+        <label className={css.label}>Location</label>
+
+        <div className={css.inputWrapper}>
+          <svg className={css.iconMap} width="20" height="20">
+            <use href="/icon/sprite.svg#map" />
           </svg>
+
           <input
             type="text"
-            className={s.locationInput}
+            className={css.locationInput}
             placeholder="City, Country"
             value={filters.location}
             onChange={handleLocationChange}
@@ -46,71 +61,95 @@ export const Filters = () => {
         </div>
       </div>
 
-      <p className={s.filtersTitle}>Filters</p>
+      <div className={css.filtersWrap}>
+      <p className={css.filtersTitle}>Filters</p>
 
-      {/* Vehicle Equipment (Checkboxes) */}
-      <div className={s.filterSection}>
-        <h3 className={s.sectionTitle}>Vehicle equipment</h3>
-        <div className={s.divider} />
-        <div className={s.optionsGrid}>
+      {/* ===== Vehicle equipment ===== */}
+      <div className={css.filterSection}>
+        <h3 className={css.sectionTitle}>Vehicle equipment</h3>
+        <hr className={css.line} />
+        <div className={css.divider} />
+
+        <div className={css.optionsGrid}>
           {[
             { id: "AC", label: "AC", icon: "ac" },
             { id: "transmission", label: "Automatic", icon: "transmission" },
-            { id: "kitchen", label: "Kitchen", icon: "kitchen" },
-            { id: "TV", label: "TV", icon: "tv" },
+            { id: "cup-hot", label: "Kitchen", icon: "kitchen" },
+            { id: "tv", label: "TV", icon: "tv" },
             { id: "bathroom", label: "Bathroom", icon: "bathroom" },
+          ].map((item) => {
+            const isActive =
+              item.id === "transmission"
+                ? filters.transmission === "automatic"
+                : filters.features[item.id as keyof typeof filters.features];
+
+            return (
+              <button
+                key={item.id}
+                type="button"
+                className={`${css.filterCard} ${isActive ? css.active : ""}`}
+                onClick={() => {
+                  if (item.id === "transmission") {
+                    handleTransmissionToggle();
+                  } else {
+                    handleFeatureToggle(
+                      item.id as keyof typeof filters.features
+                    );
+                  }
+                }}
+              >
+                <svg width="32" height="32">
+                  <use
+                    href={`/icon/sprite.svg#icon-${item.icon}`}
+                  />
+                </svg>
+
+                <span>{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ===== Vehicle type ===== */}
+      <div className={css.filterSection}>
+        <h3 className={css.sectionTitle}>Vehicle type</h3>
+        <hr className={css.line} />
+        <div className={css.divider} />
+
+        <div className={css.optionsGrid}>
+          {[
+            { id: "panelTruck", label: "Van", icon: "van" },
+            {
+              id: "fullyIntegrated",
+              label: "Fully Integrated",
+              icon: "fully",
+            },
+            { id: "alcove", label: "Alcove", icon: "alcove" },
           ].map((item) => (
             <button
               key={item.id}
               type="button"
-              className={`${s.filterCard} ${
-                (item.id === "transmission" ? filters.transmission === "automatic" : filters.features[item.id as keyof typeof filters.features])
-                  ? s.active
-                  : ""
+              className={`${css.filterCard} ${
+                filters.form === item.id ? css.active : ""
               }`}
-              onClick={() => {
-                if (item.id === "transmission") {
-                  setFilters({ transmission: filters.transmission === "automatic" ? "" : "automatic" });
-                } else {
-                  handleFeatureChange(item.id);
-                }
-              }}
+              onClick={() => handleTypeChange(item.id as CamperForm)}
             >
               <svg width="32" height="32">
-                <use href={`/icons.svg#icon-${item.icon}`} />
+                <use
+                  href={`/icon/sprite.svg#icon-${item.icon}`}
+                />
               </svg>
+
               <span>{item.label}</span>
             </button>
           ))}
-        </div>
+          </div>
+          </div>
       </div>
 
-      {/* Vehicle Type (Radio) */}
-      <div className={s.filterSection}>
-        <h3 className={s.sectionTitle}>Vehicle type</h3>
-        <div className={s.divider} />
-        <div className={s.optionsGrid}>
-          {[
-            { id: "panelTruck", label: "Van", icon: "van" },
-            { id: "fullyIntegrated", label: "Fully Integrated", icon: "fully" },
-            { id: "alcove", label: "Alcove", icon: "alcove" },
-          ].map((type) => (
-            <button
-              key={type.id}
-              type="button"
-              className={`${s.filterCard} ${filters.form === type.id ? s.active : ""}`}
-              onClick={() => handleTypeChange(type.id)}
-            >
-              <svg width="32" height="32">
-                <use href={`/icons.svg#icon-${type.icon}`} />
-              </svg>
-              <span>{type.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <button className={s.searchBtn} onClick={handleSearch}>
+      {/* ===== Search ===== */}
+      <button className={css.searchBtn} onClick={handleSearch}>
         Search
       </button>
     </aside>

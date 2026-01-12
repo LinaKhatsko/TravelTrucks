@@ -2,7 +2,69 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    margin-top: 24px;
+}
+
+.label {
+    font: 400 16px / 1.5;
+    color: #6c717b;
+}
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 12px;
+    border: none;
+    padding: 18px 20px;
+    width: 360px;
+    height: 56px;
+    background-color: #f7f7f7;
+    margin-bottom: 40px;
+    margin-top: 8px;
+}
+
+.iconMap {
+    width: 20px;
+    height: 20px;
+    fill: #6c717b;
+    flex-shrink: 0;
+}
+
+.locationInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: #6c717b;
+}
+
+.locationInput::placeholder {
+    color: #101828;
+}
+
+.filtersWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.filtersTitle {
+    font: 500 16px / 1.5;
+    color: #475467;
+}
+
+.sectionTitle {
+    font: 600 18px / 1.5;
+    color: #101828;
+    margin-bottom: 24px;
+}
+
+.line {
+    stroke-width: 1px;
+    stroke: #dadde1;
+    margin-bottom: 24px;
 }
 
 .filterCard {
@@ -11,9 +73,11 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    height: 95px;
     border: 1px solid #dadde1;
     border-radius: 12px;
+    padding: 16px 40px;
+    width: 112px;
+    height: 96px;
     background: none;
     cursor: pointer;
     transition: border-color 0.3s;
@@ -31,9 +95,11 @@
 }
 
 .searchBtn {
-    margin-top: 64px;
+    margin-top: 40px;
     padding: 16px 60px;
     background-color: #e44848;
+    width: 166px;
+    height: 56px;
     color: white;
     border: none;
     border-radius: 200px;
